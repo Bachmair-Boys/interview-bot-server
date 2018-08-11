@@ -17,25 +17,25 @@ const DATABASE_LOOKUP_ERROR = 101;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/get-count', (req, res) => {
+app.post('/get-count', (req, res) => {
     const db = new sqlite3.Database("interviewbot.db", (err) => {
         if(err) {
             console.log(err.message);
             res.send(JSON.stringify({status: DATABASE_CONNECTION_ERROR}));
         }
     });
-    db.get("SELECT count(*) FROM question WHERE type_id = ?;", req.category, (err, number) => {
+    db.get("SELECT count(*) FROM question WHERE type_id = ?;", req.body.category, (err, number) => {
         if(err) {
             console.log(err.message);
             res.send(JSON.stringify({status: DATABASE_LOOKUP_ERROR}));
         } else {
-            res.send(JSON.stringify({status: SUCCESS, count: number}));
+            res.send(JSON.stringify({status: SUCCESS, count: number["count(*)"]}));
         }
     });
     db.close();
 });
 
-app.get('/get-question', (req, res) => {
+app.post('/get-question', (req, res) => {
     const db = new sqlite3.Database("interviewbot.db", sqlite3.OPEN_READWRITE, (err) => {
         if(err) {
             console.log(err.message);
@@ -52,14 +52,14 @@ app.get('/get-question', (req, res) => {
             console.log(err.message);
             res.send(JSON.stringify({status: DATABASE_LOOKUP_ERROR}));
         } else {
-            res.send(JSON.stringify({status: SUCCESS, question: questions[req.body.question]}));
+            res.send(JSON.stringify({status: SUCCESS, question: questions[req.body.question].question}));
         }
     });
     statement.finalize();
     db.close();
 });
 
-app.get('/create-question', (req, res) => {
+app.post('/create-question', (req, res) => {
     const db = new sqlite3.Database("interviewbot.db", (err) => {
         if(err) {
             res.send(JSON.stringify({status: DATABASE_CONNECTION_ERROR}));
@@ -69,6 +69,8 @@ app.get('/create-question', (req, res) => {
     let statement = db.prepare("INSERT INTO question(question,type_id) values(?,?);");
     statement.run(req.body.question, req.body.category, (err) => {
         if(err) {
+            console.log(err.message);
+            console.log(req.body.question + " " + req.body.category);
             res.send(JSON.stringify({status: DATABASE_LOOKUP_ERROR}));
         } else {
             res.send(JSON.stringify({status: SUCCESS}));
