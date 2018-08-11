@@ -1,4 +1,4 @@
-#Interview Bot Server
+# Interview Bot Server
 ---
 Ensure that you have the lastest version of Node.js installed and preferably the lastest version of sqlite installed. Once this is done run:
 '''
@@ -6,26 +6,26 @@ git clone https://github.com/Bachmair-Boys/interview-bot-server
 cd interview-bot-server
 '''
 
-#Running
+# Running
 ---
 '''
 npm start
 '''
 
-#Interview Bot API
+# Interview Bot API
 ---
-#Category Identification
+# Category Identification
 BASIC = 0
 BEHAVIORAL = 1
 SALARY = 2
 BRAINTEASER = 3
 
-#RETURN CODES
+# RETURN CODES
 SUCCESS = 0
 DATABASE_CONNECTION_ERROR = 100
 DATABASE_LOOKUP_ERROR = 101
 
-##Methods
+## Methods
 ---
 get-count: POST, Gets the number of questions in a given question category.
 Parameters:
