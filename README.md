@@ -58,7 +58,7 @@ Return: <br>
 
 _get-categories_: GET, Gets the categories of questions currently in the database.<br>
 Parameters:<br>
-&nbsp;&nbsp;&nbsp;&nbsp; None
+&nbsp;&nbsp;&nbsp;&nbsp; None<br>
 Return: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; JSON-Encoded Data: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**status**: _int_, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
@@ -67,10 +67,8 @@ Return: <br>
 
 _get-categories_: GET, Adds the given category of questions into the database.<br>
 Parameters:<br>
-&nbsp;&nbsp;&nbsp;&nbsp; **category\_name**: _string_, name of the new category
+&nbsp;&nbsp;&nbsp;&nbsp; **category\_name**: _string_, name of the new <br>
 Return: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; JSON-Encoded Data: {<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**status**: _int_, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;
