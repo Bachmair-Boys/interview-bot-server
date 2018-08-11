@@ -13,6 +13,17 @@ const dbPromise = Promise.resolve()
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.post("");
+app.get('/get-question', async(req, res, next) => {
+    try {
+    const db = await dbPromise;
+    const [post, categories] = await Promise.all([
+      db.get('SELECT * FROM Post WHERE id = ?', req.params.id),
+      db.all('SELECT * FROM Category')
+    ]);
+    res.render('post', { post, categories });
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = app;
