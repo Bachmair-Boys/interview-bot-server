@@ -81,4 +81,22 @@ app.post('/create-question', (req, res) => {
     db.close();
 });
 
+app.get('/get-types', (req, res) => {
+    const db = new sqlite3.Database("interviewbot.db", (err) => {
+        if(err) {
+            res.send(JSON.stringify({status: DATABASE_CONNECTION_ERROR}));
+        }
+    });
+
+    db.all("SELECT type FROM type;", (err, types) => {
+        if(err) {
+            console.log(err.message);
+            res.send(JSON.stringify({status: DATABASE_LOOKUP_ERROR}));
+        } else {
+            res.send(JSON.stringify({status: SUCCESS, types: types.map(el => el["type"])}));
+        }
+    });
+    db.close();
+})
+
 module.exports = app;
