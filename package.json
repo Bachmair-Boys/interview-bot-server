@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "express": "^4.16.0",
-    "mariadb": "^0.2.6"
+    "mariadb": "^0.7.0"
   }
 }
