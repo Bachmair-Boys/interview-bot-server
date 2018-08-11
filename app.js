@@ -15,7 +15,7 @@ app.get('/get-count', (req, res) => {
 
 app.get('/get-question', async (req, res, next) => {
     const db = new sqlite3.Database("./interviewbot.db");
-    let statement = db.prepare(/*fill in sql statement with ? parameters*/);
+    let statement = db.prepare("SELECT question FROM question WHERE type_id = ?");
     statement.run("SQL STATEMENT", (err, question) => {
         res.render({});
     });
@@ -25,8 +25,10 @@ app.get('/get-question', async (req, res, next) => {
 app.get('/create-question', async(req, res, next) => {
     const db = new sqlite3.Database("./interviewbot.db");
     
-    let statement = db.prepare(/*fill in sql statement with ? parameters for question type and question*/);
+    let statement = db.prepare("INSERT INTO question(question,type_id) values(?,?)");
     statement.run(/*parameters should be question type and question*/);
+    
+    /* Basic = 0, Behavioral = 1, Salary = 2, Brainteaser = 3 */
 
     db.close();
 });
