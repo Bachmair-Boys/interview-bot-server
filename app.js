@@ -81,7 +81,7 @@ app.post('/create-question', (req, res) => {
     db.close();
 });
 
-app.get('/get-types', (req, res) => {
+app.get('/get-categories', (req, res) => {
     const db = new sqlite3.Database("interviewbot.db", (err) => {
         if(err) {
             res.send(JSON.stringify({status: DATABASE_CONNECTION_ERROR}));
@@ -93,9 +93,29 @@ app.get('/get-types', (req, res) => {
             console.log(err.message);
             res.send(JSON.stringify({status: DATABASE_LOOKUP_ERROR}));
         } else {
-            res.send(JSON.stringify({status: SUCCESS, types: types.map(el => el["type"])}));
+            res.send(JSON.stringify({status: SUCCESS, categories: types.map(el => el["type"])}));
         }
     });
+    db.close();
+})
+
+app.get('/create-categories', (req, res) => {
+    const db = new sqlite3.Database("interviewbot.db", (err) => {
+        if(err) {
+            res.send(JSON.stringify({status: DATABASE_CONNECTION_ERROR}));
+        }
+    });
+
+    let statement = db.prepare("INSERT INTO question(question,type_id) values(?,?);");
+    statement.run(req.body.category_name, (err) => {
+        if(err) {
+            console.log(err.message);
+            res.send(JSON.stringify({status: DATABASE_LOOKUP_ERROR}));
+        } else {
+            res.send(JSON.stringify({status: SUCCESS}));
+        }
+    });
+    statement.finalize();
     db.close();
 })
 
