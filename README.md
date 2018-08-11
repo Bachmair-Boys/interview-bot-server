@@ -1,16 +1,16 @@
 # Interview Bot Server
 
 Ensure that you have the lastest version of Node.js installed and preferably the lastest version of sqlite installed. Once this is done run:
-'''
+```
 git clone https://github.com/Bachmair-Boys/interview-bot-server
 cd interview-bot-server
-'''
+```
 
 # Running
 
-'''
+```
 npm start
-'''
+```
 
 # Interview Bot API
 
@@ -27,42 +27,50 @@ DATABASE_LOOKUP_ERROR = 101<br>
 
 ## Methods
 ---
-get-count: POST, Gets the number of questions in a given question category.<br>
+_get-count_: POST, Gets the number of questions in a given question category.<br>
 Parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**category**: int, category identification number to get count from<br>
 Return:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;JSON-Encoded Data: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;status: int, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;count: int, number of comments in the requested category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**status**: _int_, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**count**: _int_, number of comments in the requested category<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 <br>
 
-get-question: POST, Gets the requested question number in the requested question category.<br>
+_get-question_: POST, Gets the requested question number in the requested question category.<br>
 Parameters:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**category**: int, category identification number to find question in.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**question**: int, number of the question in the category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**category**: _int_, category identification number to find question in.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**question**: _int_, number of the question in the category<br>
 Return: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; JSON-Encoded Data: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;status: int, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;count: int, number of comments in the requested category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**status**: _int_, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**count**: _int_, number of comments in the requested category<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
-create-question: POST, Adds the given question to the database in the requested question category.<br>
+_create-question_: POST, Adds the given question to the database in the requested question category.<br>
 Parameters:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**category**: int, category identification number to find question in.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**question**: string, user created question<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**category**: _int_, category identification number to find question in.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**question**: _string_, user created question<br>
 Return: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; JSON-Encoded Data: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;status: int, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**status**: _int_, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
-get-categories: GET, Gets the categories of questions currently in the database.<br>
+_get-categories_: GET, Gets the categories of questions currently in the database.<br>
 Parameters:<br>
-
+&nbsp;&nbsp;&nbsp;&nbsp; None
 Return: <br>
 &nbsp;&nbsp;&nbsp;&nbsp; JSON-Encoded Data: {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;status: int, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;count: int, number of comments in the requested category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**status**: _int_, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**categories**: _string[]_ , number of comments in the requested category<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+
+_get-categories_: GET, Adds the given category of questions into the database.<br>
+Parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp; **category\_name**: _string_, name of the new category
+Return: <br>
+&nbsp;&nbsp;&nbsp;&nbsp; JSON-Encoded Data: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**status**: _int_, SUCCESS if check succeeded, DATABASE_LOOKUP_ERROR otherwise,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;

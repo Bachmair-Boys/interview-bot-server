@@ -106,7 +106,7 @@ app.get('/create-categories', (req, res) => {
         }
     });
 
-    let statement = db.prepare("INSERT INTO question(question,type_id) values(?,?);");
+    let statement = db.prepare("INSERT INTO type(type) values(?);");
     statement.run(req.body.category_name, (err) => {
         if(err) {
             console.log(err.message);
