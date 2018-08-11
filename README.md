@@ -65,7 +65,7 @@ Return: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;**categories**: _string[]_ , number of comments in the requested category<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 
-_get-categories_: GET, Adds the given category of questions into the database.<br>
+_create-categories_: GET, Adds the given category of questions into the database.<br>
 Parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp; **category\_name**: _string_, name of the new <br>
 Return: <br>
