@@ -1,29 +1,34 @@
-const Promise = require('bluebird');
 const express = require('express');
-const sqlite = require('sqlite');
-
+const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
-const port = process.env.PORT || 3000;
-const dbPromise = Promise.resolve()
-    .then(() => sqlite.open('./database.sqlite', { Promise }))
-    .then(db => db.migrate({ force: 'last'}));
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/get-question', async(req, res, next) => {
-    try {
-    const db = await dbPromise;
-    const [post, categories] = await Promise.all([
-      db.get('SELECT * FROM Post WHERE id = ?', req.params.id),
-      db.all('SELECT * FROM Category')
-    ]);
-    res.render('post', { post, categories });
-  } catch (err) {
-    next(err);
-  }
+app.get('/get-count', (req, res) => {
+    const db = new sqlite3.Database("./interviewbot.db");
+    const number = db.get("SELECT count(*) FROM question");
+    db.close();
+    res.render({number});
+});
+
+app.get('/get-question', async (req, res, next) => {
+    const db = new sqlite3.Database("./interviewbot.db");
+    let statement = db.prepare(/*fill in sql statement with ? parameters*/);
+    statement.run("SQL STATEMENT", (err, question) => {
+        res.render({});
+    });
+    db.close();
+});
+
+app.get('/create-question', async(req, res, next) => {
+    const db = new sqlite3.Database("./interviewbot.db");
+    
+    let statement = db.prepare(/*fill in sql statement with ? parameters for question type and question*/);
+    statement.run(/*parameters should be question type and question*/);
+
+    db.close();
 });
 
 module.exports = app;
